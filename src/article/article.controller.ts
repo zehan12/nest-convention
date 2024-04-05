@@ -1,28 +1,40 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { ArticleService } from './article.service';
 
 @Controller('article')
 export class ArticleController {
+  constructor(private articleService: ArticleService) {}
+
   // add article
   @Post('/add')
-  addArticle(): string {
-    return 'This route handle to create article';
+  addArticle(@Body() article): any {
+    console.log(article);
+    return this.articleService.addArticle(article);
   }
 
   // get all article
   @Get('/all')
-  getArticles(): string {
-    return 'This route handle to get all articles';
+  getArticles(): any {
+    return this.articleService.getAllArticle();
   }
 
-  // add article
-  @Put('/update')
-  updateArticle(): string {
-    return 'This route handle to update article';
+  // update article
+  @Put('/update/:articleId')
+  updateArticle(@Body() article): any {
+    return this.articleService.updateArticle(article);
   }
 
-  // add article
-  @Delete('/delete')
-  deleteArticle(): string {
-    return 'This route handle to delete article';
+  // delete article
+  @Delete('/delete/:articleId')
+  deleteArticle(@Param() params): any {
+    return this.articleService.deleteArticle(params.id);
   }
 }
