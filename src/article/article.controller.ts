@@ -27,7 +27,7 @@ export class ArticleController {
   }
 
   // update article
-  @Put('/update/:articleId')
+  @Put('/update')
   updateArticle(@Body() article): any {
     return this.articleService.updateArticle(article);
   }
