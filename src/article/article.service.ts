@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Article } from './data/article.dto';
+import { randomUUID } from 'node:crypto';
 
 @Injectable()
 export class ArticleService {
   public articles: Article[] = [];
 
   addArticle(article: Article): Article[] {
+    article.id = randomUUID();
     this.articles.push(article);
     return this.articles;
   }
