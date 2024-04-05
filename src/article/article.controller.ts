@@ -8,6 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
+import { Article } from './data/article.dto';
 
 @Controller('article')
 export class ArticleController {
@@ -15,26 +16,25 @@ export class ArticleController {
 
   // add article
   @Post('/add')
-  addArticle(@Body() article): any {
-    console.log(article);
+  addArticle(@Body() article): Article[] {
     return this.articleService.addArticle(article);
   }
 
   // get all article
   @Get('/all')
-  getArticles(): any {
+  getArticles(): Article[] {
     return this.articleService.getAllArticle();
   }
 
   // update article
   @Put('/update')
-  updateArticle(@Body() article): any {
+  updateArticle(@Body() article: Article): Article[] {
     return this.articleService.updateArticle(article);
   }
 
   // delete article
   @Delete('/delete/:articleId')
-  deleteArticle(@Param() params): any {
+  deleteArticle(@Param() params): Article[] {
     return this.articleService.deleteArticle(params.id);
   }
 }

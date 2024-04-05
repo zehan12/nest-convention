@@ -1,24 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { Article } from './data/article.dto';
 
 @Injectable()
 export class ArticleService {
-  public articles = [];
+  public articles: Article[] = [];
 
-  addArticle(article: any): any[] {
+  addArticle(article: Article): Article[] {
     this.articles.push(article);
     return this.articles;
   }
 
-  getAllArticle(): any[] {
+  getAllArticle(): Article[] {
     return this.articles;
   }
 
-  deleteArticle(id: string): any[] {
+  deleteArticle(id: string): Article[] {
     this.articles = this.articles.filter((article) => article.id !== id);
     return this.articles;
   }
 
-  updateArticle(article: any): any[] {
+  updateArticle(article: any): Article[] {
     const idx = this.articles.findIndex(
       (currentArticle) => (currentArticle.id = article.id),
     );
